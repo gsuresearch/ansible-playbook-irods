@@ -21,4 +21,5 @@
     chain: INPUT 
     jump: DROP
 - name: IPTables Saved
-  command: "/sbin/service iptables save"
+  command: iptables-save
+  become: true

@@ -1,0 +1,47 @@
+---
+- name: iRods
+  hosts: all
+  become: true
+  roles:
+  - common
+  - irods
+  vars:
+    svrName: "{{hostvars[inventory_hostname]['ansible_facts']['default_ipv4']['address']}}"
+
+    #The ansible user to ssh as
+    #ansible_user: vagrant
+
+    #IPtables = 0, firewalld = 1
+    fwd: 0
+
+    #Setup iRODS (and pgsql if applicable)? If 1, will use default values below
+    setup: 1
+
+    #Default PGSQL setup options
+    dbName: "ICAT"      #Database Name
+    dbAcnt: "irods"     #Database Username
+    dbPwd: "irods"      #Database Password
+
+    #iRODS 4.2.x package
+    #These can also be a URL to a specific package, if you do not want to use the latest.
+    #This ansible playbook sets up the PostgreSQL version of a database.
+    irodsPkg: "irods-server"
+    dbPluginPkg: "irods-database-plugin-postgres"
+
+    #Default iRODS setup info
+    svrType: "icat"                                       #iRODS Server Type
+    svcAcnt: "irods"                                      #serviceaccount
+    zoneKey: "zoneKey"                                    #Zone Key
+    negKey: "12345678901234567890123456789012"            #Negotiation Key
+    ctrlKey: "12345678901234567890123456789012"           #Control Plane Key
+    iAcnt: "rods"                                         #rods admin account
+    iPwd: "rods"                                          #rods admin password
+    iZone: "tempZone"                                     #irods zone
+    iVault: ""                                            #iRODS resource vault path
+    iDBsvr: "{{hostvars[inventory_hostname]['ansible_facts']['default_ipv4']['address']}}"                                   #iRODS Database Server
+    iDBname: "{{dbName}}"                                 #iRODS Database Name
+    iDBacnt: "{{dbAcnt}}"                                 #iRODS Database Username
+    iDBpwd: "{{dbPwd}}"                                   #iRODS Database Password
+
+    #Resource Server Only Variables
+    rescICAT: "1.1.1.1"   #iCAT Server IP/FQDN

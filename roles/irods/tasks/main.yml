@@ -21,11 +21,18 @@
     gpgkey: "https://packages.irods.org/irods-signing-key.asc"
     description: "RENCI iRODS Repository"
 
+#Installing Epel-Release
+- name: install epel-release
+  yum:
+    name: epel-release
+    state: present
+
 #Installing PIP
 - name: install pip
   yum: 
-    name: python2-pip
+    name: python-pip
     state: present
+
 #Installing Python Expect plugin
 - name: install python expect plugin
   pip: 

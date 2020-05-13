@@ -55,4 +55,6 @@
     jump: DROP
  #Save the iptables (can't use the "service" module on this one sadly) for Centos
 - name: IPTables Save
-  command: "/sbin/service iptables save"
+  command: iptables-save
+  become: true
+  #command: "service iptables save"
