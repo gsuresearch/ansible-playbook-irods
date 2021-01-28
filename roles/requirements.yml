@@ -1,0 +1,10 @@
+---
+- src: git@github.com:gsuresearch/ansible-role-users.git
+  version: master
+  scm: git
+  name: ansible-role-users
+
+- src: git@github.com:gsuresearch/ansible-role-repos.git
+  version: master
+  scm: git
+  name: ansible-role-repos

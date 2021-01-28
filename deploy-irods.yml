@@ -1,0 +1,29 @@
+---
+- name: Deploy Irods
+  hosts: all
+  become: yes
+  vars_files:
+      - defaults/main.yml
+  pre_tasks:
+
+     #change vagrant group, conflicts with slurm
+    - name: "Change Centos & Vagrant User Group ID"
+      group:
+        name: "{{ item.group }}"
+        gid: "{{ item.gid }}"
+        state: present
+      with_items:
+        - { gid: 9500, group: centos }
+        - { gid: 9600, group: vagrant }
+        -
+    - name: Execute Custom Repo Role
+      include_role:
+        name: ansible-role-repos
+  roles:
+    - role: ansible-role-users
+  tasks:
+    - import_tasks: tasks/common/main.yml
+    - import_tasks: tasks/irods/main.yml
+#    - debug:
+#        var: hostvars[inventory_hostname]
+  
