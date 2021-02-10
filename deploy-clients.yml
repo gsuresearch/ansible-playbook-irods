@@ -18,7 +18,7 @@
 
   tasks:
 
-    - name: Install Irods Client
+    - name: Install Irods Packages
       yum:
         name:
           - irods-icommands-4.3.0-1.x86_64
