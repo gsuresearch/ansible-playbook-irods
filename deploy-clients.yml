@@ -29,16 +29,16 @@
       file:
         path: "/etc/irods/ssl"
         state: directory
-        owner: "{{ irods_user }}"
-        group: "{{ irods_group }}"
+        owner: "root"
+        group: "root"
         mode: '0755'
 
     - name: Copy Irod Cert
       copy:
         src: "arcirodsprdicat_rs_gsu_edu_cert.cer"
         dest: "/etc/irods/ssl/arcirodsprdicat_rs_gsu_edu_cert.cer"
-        owner: "{{ irods_user }}"
-        group: "{{ irods_group }}"
+        owner: "root"
+        group: "root"
         mode: '0600'
 
     - name: Remove Passphrase From Irods Cert
