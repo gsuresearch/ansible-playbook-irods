@@ -1,6 +1,8 @@
 ---
 
 svrName: "irods"
+irods_user: "irods"
+irods_group: "irods"
 
 #The ansible user to ssh as
 #ansible_user: vagrant

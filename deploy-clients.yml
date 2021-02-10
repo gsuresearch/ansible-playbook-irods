@@ -1,0 +1,48 @@
+---
+- name: Deploy Irods Clients
+  hosts: irods-clients
+  become: yes
+  vars_files:
+      - defaults/main.yml
+  pre_tasks:
+
+     #change vagrant group, conflicts with slurm
+    - name: "Change Centos & Vagrant User Group ID"
+      group:
+        name: "{{ item.group }}"
+        gid: "{{ item.gid }}"
+        state: present
+      with_items:
+        - { gid: 9500, group: centos }
+        - { gid: 9600, group: vagrant }
+
+  tasks:
+
+    - name: Install Irods Client
+      yum:
+        name:
+          - irods-icommands-4.3.0-1.x86_64
+          - irods-externals-clang6.0-0-1.0-1.x86_64
+        state: latest
+
+    - name: Create Irods Certification Directory
+      file:
+        path: "/etc/irods/ssl/"
+        state: directory
+        owner: "{{ irods_user }}"
+        group: "{{ irods_group }}"
+        mode: '0755'
+
+    - name: Copy Certifications
+      file:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        owner: "{{ irods_user }}"
+        group: "{{ irods_group }}"
+        mode: '0600'
+      with_items:
+        - { src: 'irods.crt', dest: 'etc/irods/ssl/irods.crt' }
+
+#    - debug:
+#        var: hostvars[inventory_hostname]
+  

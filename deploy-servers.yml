@@ -1,6 +1,6 @@
 ---
-- name: Deploy Irods
-  hosts: all
+- name: Deploy Irods Servers
+  hosts: irods-server
   become: yes
   vars_files:
       - defaults/main.yml
@@ -19,8 +19,6 @@
     - name: Execute Custom Repo Role
       include_role:
         name: ansible-role-repos
-  roles:
-    - role: ansible-role-users
   tasks:
     - import_tasks: tasks/common/main.yml
     - import_tasks: tasks/irods/main.yml
