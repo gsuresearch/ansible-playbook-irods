@@ -25,23 +25,24 @@
           - irods-externals-clang6.0-0-1.0-1.x86_64
         state: latest
 
-    - name: Create Irods Certification Directory
+    - name: Create Directory For Certifications
       file:
-        path: "/etc/irods/ssl/"
+        path: "/etc/irods/ssl"
         state: directory
         owner: "{{ irods_user }}"
         group: "{{ irods_group }}"
         mode: '0755'
 
-    - name: Copy Certifications
-      file:
-        src: "{{ item.src }}"
-        dest: "{{ item.dest }}"
+    - name: Copy Irod Cert
+      copy:
+        src: "arcirodsprdicat_rs_gsu_edu_cert.cer"
+        dest: "/etc/irods/ssl/arcirodsprdicat_rs_gsu_edu_cert.cer"
         owner: "{{ irods_user }}"
         group: "{{ irods_group }}"
         mode: '0600'
-      with_items:
-        - { src: 'irods.crt', dest: 'etc/irods/ssl/irods.crt' }
+
+    - name: Remove Passphrase From Irods Cert
+      command: openssl x509 -in /etc/irods/ssl/arcirodsprdicat_rs_gsu_edu_cert.cer -out /etc/irods/ssl/arcirodsprdicat_rs_gsu_edu_cert.pem
 
 #    - debug:
 #        var: hostvars[inventory_hostname]
