@@ -39,7 +39,7 @@
         dest: "/etc/irods/ssl/arcirodsprdicat_rs_gsu_edu_cert.cer"
         owner: "root"
         group: "root"
-        mode: '0600'
+        mode: '0644'
 
     - name: Remove Passphrase From Irods Cert
       command: openssl x509 -in /etc/irods/ssl/arcirodsprdicat_rs_gsu_edu_cert.cer -out /etc/irods/ssl/arcirodsprdicat_rs_gsu_edu_cert.pem
