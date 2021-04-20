@@ -16,14 +16,21 @@
         - { gid: 9500, group: centos }
         - { gid: 9600, group: vagrant }
 
+    - name: Remove Old Irods Packages
+      yum:
+        name:
+          - irods-icommands-4.3.0-1.x86_64
+          - irods-externals-clang6.0-0-1.0-1.x86_64
+        state: absent
+
   tasks:
 
     - name: Install Irods Packages
       yum:
         name:
-          - irods-icommands-4.3.0-1.x86_64
-          - irods-externals-clang6.0-0-1.0-1.x86_64
-        state: latest
+          - irods-icommands
+          - irods-externals-clang-runtime6.0-0
+        state: present
 
     - name: Create Directory For Certifications
       file:
