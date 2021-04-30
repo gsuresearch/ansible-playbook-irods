@@ -30,6 +30,7 @@
         name:
           - irods-icommands
           - irods-externals-clang-runtime6.0-0
+          - irods-runtime
         state: present
 
     - name: Create Directory For Certifications
