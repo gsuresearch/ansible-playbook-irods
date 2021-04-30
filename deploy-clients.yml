@@ -21,6 +21,7 @@
         name:
           - irods-icommands-4.3.0-1.x86_64
           - irods-externals-clang6.0-0-1.0-1.x86_64
+          - irods-runtime
         state: absent
 
   tasks:
