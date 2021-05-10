@@ -1,0 +1,3 @@
+---
+#Used for role installs, mainly clients
+- include: client.yml

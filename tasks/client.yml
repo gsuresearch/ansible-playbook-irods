@@ -1,0 +1,25 @@
+---
+- name: Install Irods Packages
+  yum:
+    name:
+      - irods-icommands
+    state: present
+
+- name: Create Directory For Certifications
+  file:
+    path: "/etc/irods/ssl"
+    state: directory
+    owner: "root"
+    group: "root"
+    mode: '0755'
+
+- name: Copy Irod Cert
+  copy:
+    src: "arcirodsprdicat_rs_gsu_edu_cert.cer"
+    dest: "/etc/irods/ssl/arcirodsprdicat_rs_gsu_edu_cert.cer"
+    owner: "root"
+    group: "root"
+    mode: '0644'
+
+- name: Remove Passphrase From Irods Cert
+  command: openssl x509 -in /etc/irods/ssl/arcirodsprdicat_rs_gsu_edu_cert.cer -out /etc/irods/ssl/arcirodsprdicat_rs_gsu_edu_cert.pem
